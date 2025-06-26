@@ -85,6 +85,19 @@ async function main() {
         console.log('📦 Installing backend dependencies...');
         await runCommand('npm', ['install'], __dirname, 'Backend Install');
 
+        // Build packages
+        console.log('🔨 Building packages...');
+        const packages = ['audio-converter', 'twilio-server', 'gemini-live-client', 'tw2gem-server'];
+        
+        for (const pkg of packages) {
+            const pkgPath = join(__dirname, 'packages', pkg);
+            if (fs.existsSync(pkgPath)) {
+                console.log(`🔨 Building ${pkg}...`);
+                await runCommand('npm', ['install'], pkgPath, `${pkg} Install`);
+                await runCommand('npm', ['run', 'build'], pkgPath, `${pkg} Build`);
+            }
+        }
+
         // Install frontend dependencies
         console.log('📦 Installing frontend dependencies...');
         await runCommand('npm', ['install'], join(__dirname, 'frontend'), 'Frontend Install');

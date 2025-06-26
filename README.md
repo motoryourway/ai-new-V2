@@ -1,6 +1,15 @@
-# AI Call Center - One Command Deploy
+# AI Call Center - Complete Backend & Frontend
 
-A complete AI-powered call center solution with comprehensive API endpoints, campaign management, lead tracking, and payment processing.
+A complete AI-powered call center solution with comprehensive API endpoints, campaign management, lead tracking, payment processing, and full Twilio-Gemini integration.
+
+## 🎯 Complete Solution Includes:
+
+- **Full Backend API** (73+ endpoints)
+- **Twilio WebSocket Server** (tw2gem-server)
+- **Gemini Live Client** (AI voice processing)
+- **Audio Converter** (μ-law ↔ PCM conversion)
+- **Frontend Dashboard** (React/Next.js)
+- **Database Management** (Supabase integration)
 
 ## 🚀 Quick Start
 
@@ -12,6 +21,7 @@ node start-ai-call-center.js
 
 This will:
 - Install all dependencies (backend & frontend)
+- Build all packages (twilio-server, gemini-live-client, tw2gem-server, audio-converter)
 - Set up database tables
 - Start backend API server (port 12001)
 - Start frontend dashboard (port 3000)
@@ -80,6 +90,14 @@ pm2 delete all
 - **Backend API**: http://localhost:12001
 - **Health Check**: http://localhost:12001/health
 - **API Documentation**: http://localhost:12001/status
+
+## 📦 Core Packages
+
+### Twilio-Gemini Integration
+- **`@tw2gem/twilio-server`** - WebSocket server for Twilio voice streams
+- **`@tw2gem/gemini-live-client`** - Real-time Gemini Live API client
+- **`@tw2gem/tw2gem-server`** - Bridge between Twilio and Gemini with function handling
+- **`@tw2gem/audio-converter`** - Audio format conversion (μ-law ↔ PCM, resampling)
 
 ## 🎯 Features
 

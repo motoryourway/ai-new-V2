@@ -792,13 +792,10 @@ app.post('/webhook/voice', async (req, res) => {
                 const start = twiml.start();
                 start.stream({
                     url: WEBSOCKET_URL,
-                    track: 'both_tracks'
+                    tracks: 'both'
                 });
                 break;
         }
-        
-        // Keep the call alive
-        twiml.pause({ length: 60 });
         
         res.type('text/xml');
         res.send(twiml.toString());
@@ -820,10 +817,8 @@ app.post('/webhook/voice', async (req, res) => {
         const start = twiml.start();
         start.stream({
             url: WEBSOCKET_URL,
-            track: 'both_tracks'
+            tracks: 'both'
         });
-        
-        twiml.pause({ length: 60 });
         
         res.type('text/xml');
         res.send(twiml.toString());
@@ -925,11 +920,8 @@ app.post('/webhook/ivr-selection', async (req, res) => {
         const start = twiml.start();
         start.stream({
             url: WEBSOCKET_URL,
-            track: 'both_tracks'
+            tracks: 'both'
         });
-        
-        // Keep the call alive
-        twiml.pause({ length: 60 });
         
         res.type('text/xml');
         res.send(twiml.toString());
@@ -988,11 +980,8 @@ app.post('/webhook/ivr-fallback', async (req, res) => {
         const start = twiml.start();
         start.stream({
             url: WEBSOCKET_URL,
-            track: 'both_tracks'
+            tracks: 'both'
         });
-        
-        // Keep the call alive
-        twiml.pause({ length: 60 });
         
         res.type('text/xml');
         res.send(twiml.toString());

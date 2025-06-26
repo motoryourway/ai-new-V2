@@ -788,11 +788,10 @@ app.post('/webhook/voice', async (req, res) => {
             case 'connect_ai':
             default:
                 console.log('🤖 Connecting to AI agent');
-                // Start a stream to capture audio
-                const start = twiml.start();
-                start.stream({
-                    url: WEBSOCKET_URL,
-                    tracks: 'both'
+                // Connect bidirectional stream for conversation
+                const connect = twiml.connect();
+                connect.stream({
+                    url: WEBSOCKET_URL
                 });
                 break;
         }
@@ -814,10 +813,9 @@ app.post('/webhook/voice', async (req, res) => {
         
         // Fallback to default response
         const twiml = new twilio.twiml.VoiceResponse();
-        const start = twiml.start();
-        start.stream({
-            url: WEBSOCKET_URL,
-            tracks: 'both'
+        const connect = twiml.connect();
+        connect.stream({
+            url: WEBSOCKET_URL
         });
         
         res.type('text/xml');
@@ -916,11 +914,10 @@ app.post('/webhook/ivr-selection', async (req, res) => {
         // Connect to the selected agent
         const twiml = new twilio.twiml.VoiceResponse();
         
-        // Start a stream to capture audio
-        const start = twiml.start();
-        start.stream({
-            url: WEBSOCKET_URL,
-            tracks: 'both'
+        // Connect bidirectional stream for conversation
+        const connect = twiml.connect();
+        connect.stream({
+            url: WEBSOCKET_URL
         });
         
         res.type('text/xml');
@@ -976,11 +973,10 @@ app.post('/webhook/ivr-fallback', async (req, res) => {
             language: agent.language_code || 'en-US'
         }, 'I didn\'t receive any input. Connecting you to our general assistant.');
         
-        // Start a stream to capture audio
-        const start = twiml.start();
-        start.stream({
-            url: WEBSOCKET_URL,
-            tracks: 'both'
+        // Connect bidirectional stream for conversation
+        const connect = twiml.connect();
+        connect.stream({
+            url: WEBSOCKET_URL
         });
         
         res.type('text/xml');

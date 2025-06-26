@@ -1,15 +1,27 @@
-# AI Call Center - Complete Backend & Frontend
+# TW2GEM AI Call Center - Complete Monorepo
 
-A complete AI-powered call center solution with comprehensive API endpoints, campaign management, lead tracking, payment processing, and full Twilio-Gemini integration.
+A complete TW2GEM-based AI call center solution built on the proven tw2gem-server architecture. This monorepo contains all packages for integrating Twilio with Google's Gemini AI for real-time audio processing, plus a comprehensive management UI and API.
 
-## 🎯 Complete Solution Includes:
+## 🏗️ TW2GEM Architecture
 
-- **Full Backend API** (73+ endpoints)
-- **Twilio WebSocket Server** (tw2gem-server)
-- **Gemini Live Client** (AI voice processing)
-- **Audio Converter** (μ-law ↔ PCM conversion)
-- **Frontend Dashboard** (React/Next.js)
-- **Database Management** (Supabase integration)
+Built on the core TW2GEM principles:
+- **Modular Package Structure** - Each component is a separate, reusable package
+- **Real-time Audio Processing** - Direct Twilio ↔ Gemini integration
+- **WebSocket-based Communication** - Low-latency voice streaming
+- **TypeScript-first Development** - Type-safe, scalable codebase
+
+## 📦 Monorepo Structure
+
+```
+packages/
+├── audio-converter/     # Audio format conversion (μ-law ↔ PCM)
+├── twilio-server/       # Twilio WebSocket server
+├── gemini-live-client/  # Gemini Live API client
+├── tw2gem-server/       # Core bridge server (Twilio ↔ Gemini)
+├── server/             # Management API server (built on tw2gem)
+├── ui/                 # Management dashboard (React/Next.js)
+└── examples/           # Example implementations
+```
 
 ## 🚀 Quick Start
 
@@ -20,162 +32,173 @@ node start-ai-call-center.js
 ```
 
 This will:
-- Install all dependencies (backend & frontend)
-- Build all packages (twilio-server, gemini-live-client, tw2gem-server, audio-converter)
+- Install all workspace dependencies
+- Build all TW2GEM packages (audio-converter, twilio-server, gemini-live-client, tw2gem-server)
 - Set up database tables
-- Start backend API server (port 12001)
-- Start frontend dashboard (port 3000)
+- Start management API server (port 12001) 
+- Start UI dashboard (port 3000)
 - Configure PM2 process management
+
+## 🔧 Development
+
+### Individual Package Development
+```bash
+# Start just the core server
+npm run dev
+
+# Start UI development server
+npm run ui:dev
+
+# Start API server development
+npm run server:dev
+
+# Build all packages
+npm run build
+
+# Build just the UI
+npm run ui:build
+```
 
 ## 📋 Prerequisites
 
 - Node.js 18+ 
-- npm or yarn
-- Supabase account
-- Twilio account
-- Google Gemini API key
-- Stripe account (optional, for payments)
+- PM2 (installed automatically)
 
-## ⚙️ Configuration
+## 🔑 Environment Setup
 
-After running the start command, update these files with your credentials:
+The start script will create `.env` files with placeholders. Update these with your credentials:
 
 ### Backend (.env)
 ```env
-SUPABASE_URL=your_supabase_url_here
-SUPABASE_ANON_KEY=your_supabase_anon_key_here
-SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key_here
-GEMINI_API_KEY=your_gemini_api_key_here
-TWILIO_ACCOUNT_SID=your_twilio_account_sid_here
-TWILIO_AUTH_TOKEN=your_twilio_auth_token_here
-TWILIO_PHONE_NUMBER=your_twilio_phone_number_here
-TWILIO_API_KEY_SID=your_twilio_api_key_sid_here
-TWILIO_API_KEY_SECRET=your_twilio_api_key_secret_here
-STRIPE_SECRET_KEY=your_stripe_secret_key_here
-STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key_here
-STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret_here
+GEMINI_API_KEY=your_gemini_api_key
+SUPABASE_URL=your_supabase_url
+SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+TWILIO_ACCOUNT_SID=your_twilio_account_sid
+TWILIO_AUTH_TOKEN=your_twilio_auth_token
+TWILIO_PHONE_NUMBER=your_twilio_phone_number
+TWILIO_API_KEY_SID=your_twilio_api_key_sid
+TWILIO_API_KEY_SECRET=your_twilio_api_key_secret
 ```
 
-### Frontend (frontend/.env.local)
+### UI (.env.local)
 ```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url_here
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
-NEXT_PUBLIC_API_BASE_URL=http://localhost:12001
+VITE_API_URL=http://localhost:12001
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
-## 🔧 Management Commands
+## 🌐 Access Points
 
-```bash
-# Check service status
-pm2 status
-
-# View logs
-pm2 logs
-pm2 logs ai-call-backend
-pm2 logs ai-call-frontend
-
-# Restart services
-pm2 restart all
-pm2 restart ai-call-backend
-pm2 restart ai-call-frontend
-
-# Stop services
-pm2 stop all
-pm2 delete all
-```
-
-## 📊 Access Points
-
-- **Frontend Dashboard**: http://localhost:3000
-- **Backend API**: http://localhost:12001
+After starting:
+- **Management UI**: http://localhost:3000
+- **API Server**: http://localhost:12001
 - **Health Check**: http://localhost:12001/health
 - **API Documentation**: http://localhost:12001/status
 
-## 📦 Core Packages
+## 📦 Core TW2GEM Packages
 
-### Twilio-Gemini Integration
+### Real-time Audio Processing
+- **`@tw2gem/audio-converter`** - Audio format conversion (μ-law ↔ PCM, resampling)
 - **`@tw2gem/twilio-server`** - WebSocket server for Twilio voice streams
 - **`@tw2gem/gemini-live-client`** - Real-time Gemini Live API client
-- **`@tw2gem/tw2gem-server`** - Bridge between Twilio and Gemini with function handling
-- **`@tw2gem/audio-converter`** - Audio format conversion (μ-law ↔ PCM, resampling)
+- **`@tw2gem/tw2gem-server`** - Core bridge server with function handling
+
+### Application Layer
+- **`@tw2gem/server-api`** - Management API server (built on tw2gem-server)
+- **`@tw2gem/ui`** - Management dashboard and call center interface
 
 ## 🎯 Features
 
-### Core Functionality
-- ✅ AI-powered voice calls with Gemini
-- ✅ Inbound & outbound call handling
-- ✅ Real-time call transcription
-- ✅ Interactive Voice Response (IVR)
+### Core TW2GEM Functionality
+- ✅ Real-time Twilio ↔ Gemini audio streaming
+- ✅ WebSocket-based voice communication
+- ✅ Audio format conversion (μ-law, PCM, resampling)
+- ✅ Function calling and AI interactions
+- ✅ Low-latency voice processing
+
+### Management & API Features
+- ✅ 73+ REST API endpoints
 - ✅ Campaign management
-- ✅ Lead tracking & management
-- ✅ Agent configuration
-
-### API Endpoints (73+ endpoints)
-- ✅ Call management (CRUD operations)
-- ✅ Campaign control (start/pause/stop)
-- ✅ Lead management & import
-- ✅ Agent configuration
-- ✅ IVR menu management
-- ✅ Notification system
-- ✅ Data export (CSV/JSON)
+- ✅ Lead tracking and CRM
+- ✅ Call analytics and reporting
 - ✅ Payment processing (Stripe)
-- ✅ Integration management (Zapier, GoHighLevel)
-- ✅ Email notifications
-- ✅ Usage tracking & analytics
+- ✅ User management and authentication
+- ✅ Real-time call monitoring
 
-### Integrations
-- ✅ Twilio (Voice & SMS)
-- ✅ Google Gemini AI
-- ✅ Supabase (Database)
-- ✅ Stripe (Payments)
-- ✅ Zapier (Automation)
-- ✅ GoHighLevel (CRM)
+### UI Dashboard Features
+- ✅ Modern React/Next.js interface
+- ✅ Real-time call monitoring
+- ✅ Campaign management
+- ✅ Lead management
+- ✅ Analytics and reporting
+- ✅ User administration
 
-## 🗄️ Database Tables
+## 🔄 Process Management
 
-The system automatically creates these tables:
-- `profiles` - User profiles
-- `ai_agents` - AI agent configurations
-- `call_logs` - Call history and recordings
-- `campaigns` - Outbound campaigns
-- `campaign_leads` - Lead management
-- `ivr_menus` & `ivr_options` - IVR system
-- `notifications` - System notifications
-- `webhook_endpoints` - Webhook management
-- `zapier_integrations` - Zapier connections
-- `subscriptions` & `usage_records` - Billing
-- And more...
-
-## 🔐 Security Features
-
-- JWT authentication with Supabase
-- Row-level security (RLS)
-- API key management
-- Webhook signature verification
-- CORS protection
-- Rate limiting
-
-## 📈 Monitoring
-
-- Health check endpoints
-- System status monitoring
-- Real-time call tracking
-- Usage analytics
-- Error logging
-- Performance metrics
-
-## 🆘 Troubleshooting
-
-1. **Services won't start**: Check if ports 3000 and 12001 are available
-2. **Database errors**: Verify Supabase credentials and connection
-3. **Call issues**: Check Twilio webhook configuration
-4. **Frontend errors**: Ensure API_BASE_URL points to backend
-
-## 📞 Support
-
-For issues or questions, check the logs:
+### PM2 Commands
 ```bash
-pm2 logs
+pm2 status              # View all processes
+pm2 logs ai-call-backend # View backend logs
+pm2 logs ai-call-ui     # View UI logs
+pm2 restart all         # Restart all processes
+pm2 stop all           # Stop all processes
+pm2 delete all         # Delete all processes
 ```
 
-The system includes comprehensive error handling and logging for troubleshooting.
+## 🏗️ Architecture Overview
+
+```
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   Twilio Call   │◄──►│  TW2GEM Server   │◄──►│  Gemini Live    │
+│   (WebSocket)   │    │   (Core Bridge)  │    │      API        │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+                                │
+                                ▼
+                       ┌──────────────────┐
+                       │  Management API  │
+                       │    (Express)     │
+                       └──────────────────┘
+                                │
+                                ▼
+                       ┌──────────────────┐
+                       │   UI Dashboard   │
+                       │  (React/Next.js) │
+                       └──────────────────┘
+```
+
+## 🚀 Deployment
+
+### Production Deployment
+1. Clone the repository
+2. Run `node start-ai-call-center.js`
+3. Update environment variables
+4. Configure your domain/reverse proxy
+5. Set up SSL certificates
+
+### Docker Support
+```bash
+# Build and run with Docker
+docker build -t tw2gem-ai-call-center .
+docker run -p 3000:3000 -p 12001:12001 tw2gem-ai-call-center
+```
+
+## 🤝 Contributing
+
+This project follows TW2GEM monorepo conventions:
+
+1. Each package is independent and reusable
+2. TypeScript-first development
+3. Consistent API patterns
+4. Comprehensive testing
+5. Clear documentation
+
+## 📄 License
+
+MIT License - see LICENSE file for details.
+
+## 🔗 Related Projects
+
+- [TW2GEM Core](https://github.com/TianMaster93/tw2gem) - Original TW2GEM monorepo
+- [Twilio Voice SDK](https://www.twilio.com/docs/voice)
+- [Google Gemini Live API](https://ai.google.dev/gemini-api/docs/live)

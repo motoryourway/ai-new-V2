@@ -16,6 +16,8 @@ dist/
 build/
 .next/
 out/
+packages/*/dist/
+packages/*/build/
 
 # Runtime data
 pids
@@ -101,3 +103,10 @@ Thumbs.db
 **/test/
 **/tests/
 **/__tests__/
+
+# TypeScript
+*.tsbuildinfo
+
+# Monorepo specific
+.turbo
+.rush

@@ -12,7 +12,7 @@ console.log('🚀 Starting AI Call Center...');
 
 // Check if .env files exist, if not create them with placeholders
 const backendEnvPath = join(__dirname, '.env');
-const frontendEnvPath = join(__dirname, 'frontend', '.env.local');
+const frontendEnvPath = join(__dirname, 'packages', 'ui', '.env.local');
 
 if (!fs.existsSync(backendEnvPath)) {
     console.log('📝 Creating backend .env file...');
@@ -100,7 +100,7 @@ async function main() {
 
         // Install frontend dependencies
         console.log('📦 Installing frontend dependencies...');
-        await runCommand('npm', ['install'], join(__dirname, 'frontend'), 'Frontend Install');
+        await runCommand('npm', ['install'], join(__dirname, 'packages', 'ui'), 'UI Install');
 
         // Create database tables
         console.log('🗄️ Setting up database tables...');
@@ -112,11 +112,11 @@ async function main() {
 
         // Start backend with PM2
         console.log('🚀 Starting backend server...');
-        await runCommand('pm2', ['start', 'server-standalone.js', '--name', 'ai-call-backend', '--watch'], __dirname, 'Backend Start');
+        await runCommand('pm2', ['start', 'server.js', '--name', 'ai-call-backend', '--watch'], __dirname, 'Backend Start');
 
         // Start frontend with PM2
         console.log('🚀 Starting frontend server...');
-        await runCommand('pm2', ['start', 'npm', '--name', 'ai-call-frontend', '--', 'run', 'dev'], join(__dirname, 'frontend'), 'Frontend Start');
+        await runCommand('pm2', ['start', 'npm', '--name', 'ai-call-ui', '--', 'run', 'dev'], join(__dirname, 'packages', 'ui'), 'UI Start');
 
         console.log('');
         console.log('🎉 AI Call Center started successfully!');

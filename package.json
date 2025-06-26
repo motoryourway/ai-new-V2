@@ -1,14 +1,24 @@
 {
-  "name": "ai-call-center",
+  "name": "tw2gem-ai-call-center",
   "version": "1.0.0",
-  "description": "AI Call Center - Complete solution with comprehensive API endpoints",
-  "main": "server-standalone.js",
+  "description": "TW2GEM AI Call Center - Complete monorepo with Twilio-Gemini integration and management UI",
   "type": "module",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "start": "node start-ai-call-center.js",
-    "dev": "node server-standalone.js",
-    "build": "echo 'No build step required'",
-    "health": "curl http://localhost:12001/health"
+    "dev": "node server.js",
+    "build": "npm run build --workspaces",
+    "lint": "npm run lint --workspaces",
+    "lint:fix": "npm run lint:fix --workspaces",
+    "format": "prettier --write .",
+    "clean": "npm run clean --workspaces && rm -rf dist",
+    "health": "curl http://localhost:12001/health",
+    "ui:dev": "npm run dev --workspace=packages/ui",
+    "ui:build": "npm run build --workspace=packages/ui",
+    "server:dev": "npm run dev --workspace=packages/server"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -22,7 +32,6 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "node-fetch": "^3.3.2",
-    "playwright": "^1.53.1",
     "stripe": "^18.2.1",
     "twilio": "^5.7.1",
     "uuid": "^11.1.0",
@@ -31,17 +40,24 @@
   "devDependencies": {
     "@types/node": "^24.0.3",
     "@types/ws": "^8.18.1",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.57.0",
+    "prettier": "^3.0.0",
     "typescript": "^5.8.3"
   },
   "keywords": [
-    "ai",
-    "calling",
+    "tw2gem",
     "twilio",
     "gemini",
+    "ai",
     "voice",
-    "assistant"
+    "call-center",
+    "monorepo",
+    "websocket",
+    "real-time"
   ],
-  "author": "AI Calling System",
+  "author": "AI Call Center Team",
   "license": "MIT",
   "repository": {
     "type": "git",

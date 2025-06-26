@@ -1,0 +1,39 @@
+{
+  "name": "@tw2gem/server-api",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "TW2GEM AI Call Center API Server - Built on tw2gem-server infrastructure",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node src/server.js",
+    "build": "echo 'No build step required for API server'",
+    "lint": "echo 'Linting not configured'",
+    "clean": "echo 'No clean step required'"
+  },
+  "dependencies": {
+    "@tw2gem/tw2gem-server": "1.0.1",
+    "@google/generative-ai": "^0.24.1",
+    "@supabase/supabase-js": "^2.50.0",
+    "cors": "^2.8.5",
+    "csv-parser": "^3.2.0",
+    "csv-writer": "^1.6.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "node-fetch": "^3.3.2",
+    "stripe": "^18.2.1",
+    "twilio": "^5.7.1",
+    "uuid": "^11.1.0",
+    "ws": "^8.18.2"
+  },
+  "keywords": [
+    "tw2gem",
+    "api",
+    "server",
+    "call-center",
+    "twilio",
+    "gemini"
+  ],
+  "author": "TW2GEM Team",
+  "license": "MIT"
+}

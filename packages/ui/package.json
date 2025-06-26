@@ -1,8 +1,9 @@
 {
-  "name": "ai-calling-frontend",
+  "name": "@tw2gem/ui",
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "description": "TW2GEM AI Call Center Management UI - Built on tw2gem-server",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
